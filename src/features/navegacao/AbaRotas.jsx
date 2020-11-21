@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { Paper, Tabs, Tab, AppBar } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
-const AbaRotas: React.FC = () => {
+const AbaRotas = () => {
 
-  const [aba, setAba] = useState<number>(0);
+  const [aba, setAba] = useState(0);
 
-  const handleChange = (e: React.ChangeEvent<{}>, value: any) => {
+  const handleChange = (e, value) => {
     setAba(value);
   }
 
