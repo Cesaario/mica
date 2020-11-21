@@ -1,33 +1,26 @@
 import React from "react";
-import { Paper } from "@material-ui/core";
+import { Paper, makeStyles } from "@material-ui/core";
+import { BlockMath } from 'react-katex';
+import { gerarTf } from "./cardFuncaoUtil";
+import 'katex/dist/katex.min.css';
+import './CardFuncao.css';
+
+const useStyles = makeStyles({
+  paper: {
+    padding: 1,
+  },
+});
 
 const CardFuncao = () => {
 
-  const getTermo = (vet) => {
-    var termo = '';
-    for (var i = 0; i < vet.length; i++) {
-      if (vet[i] == 0) continue;
-      if (vet[i] > 0 && i != 0) termo += '+';
-      if (i == vet.length - 1) {
-        termo += vet[i]
-      } else if (i == vet.length - 2) {
-        if (vet[i] != 1) termo += vet[i]
-        termo += 's'
-      } else {
-        if (vet[i] != 1) termo += vet[i]
-        termo += 's^' + (vet.length - 1 - i)
-      }
-    }
-    return termo;
-  }
-
-  const gerarTf = () => {
-    return "G(s)=\\frac{" + getTermo([1,2]) + "}{" + getTermo([2,3]) + "}";
-  }
+  const classes = useStyles();
 
   return (
-    <Paper>
-
+    <Paper className={classes.paper}>
+      <BlockMath
+        math={gerarTf()}
+        errorColor={'#f00'}
+      />
     </Paper>
   );
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.scss';
+import './App.css';
 import AbaRotas from './features/navegacao/AbaRotas';
 import SwitchRotas from './features/navegacao/SwitchRotas';
 import { BrowserRouter as Router } from "react-router-dom";
