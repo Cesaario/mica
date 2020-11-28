@@ -38,7 +38,7 @@ const useStyles = makeStyles({
 const ConfiguracaoSimulador = () => {
   const classes = useStyles();
 
-  const [statusModal, setStatusModal] = useState(true);
+  const [statusModal, setStatusModal] = useState(false);
 
   return (
     <Paper className={classes.paper}>

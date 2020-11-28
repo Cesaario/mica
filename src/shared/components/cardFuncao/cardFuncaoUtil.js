@@ -16,6 +16,6 @@ export const getTermo = (vet) => {
   return termo;
 }
 
-export const gerarTf = () => {
-  return `G(s)=\\frac{${getTermo([1, 2])}}{${getTermo([2, 3])}}`
+export const gerarTf = ({num, den}) => {
+  return `G(s)=\\frac{${getTermo(num)}}{${getTermo(den)}}`
 }
