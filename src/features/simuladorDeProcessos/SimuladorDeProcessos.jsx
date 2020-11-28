@@ -11,28 +11,35 @@ const useStyles = makeStyles({
     width: "100%",
     height: "100%",
   },
+  gridGrafico: {
+    padding: "5px 10px",
+  }
 });
 
 const SimuladorDeProcessos = () => {
   const classes = useStyles();
 
   return (
-    <Grid
-      container
-      spacing={1}
-      className={classes.gridSimulador}
-      align="center"
-    >
-      <Grid item xs={6}>
-        <CardFuncao />
+    <Grid container direction="column">
+      <Grid
+        container
+        item
+        spacing={1}
+        className={classes.gridSimulador}
+        align="center"
+        justify="flex-start"
+      >
+        <Grid item xs={6}>
+          <CardFuncao />
+        </Grid>
+        <Grid item xs={3}>
+          <ConfiguracaoSimulador />
+        </Grid>
+        <Grid item xs={3}>
+          <LigaDesliga />
+        </Grid>
       </Grid>
-      <Grid item xs={3}>
-        <ConfiguracaoSimulador />
-      </Grid>
-      <Grid item xs={3}>
-        <LigaDesliga />
-      </Grid>
-      <Grid item xs={12}>
+      <Grid item className={classes.gridGrafico}>
         <Grafico />
       </Grid>
     </Grid>
