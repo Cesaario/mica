@@ -1,29 +1,31 @@
 import { Paper, Button, makeStyles } from "@material-ui/core";
 
-const useStyles = makeStyles({
-  botaoLiga: {
-    backgroundColor: "#43a047",
-    color: "#fff",
-    width: 100,
-    margin: 20
-  },
-  botaoDesliga: {
-    backgroundColor: "#e53935",
-    color: "#fff",
-    width: 100,
-    margin: 20
-  },
-  paper: {
-    height: 90,
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center"
-  }
+const useStyles = makeStyles(({ palette }) => {
+  console.log(palette)
+  return {
+    botaoLiga: {
+      backgroundColor: palette.success.main,
+      color: palette.grey[50],
+      width: 100,
+      margin: 20,
+    },
+    botaoDesliga: {
+      backgroundColor: palette.error.main,
+      color: palette.grey[50],
+      width: 100,
+      margin: 20,
+    },
+    paper: {
+      height: 90,
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+  };
 });
 
 const LigaDesliga = () => {
-
   const classes = useStyles();
 
   return (
@@ -35,7 +37,7 @@ const LigaDesliga = () => {
         Desligar
       </Button>
     </Paper>
-  )
-}
+  );
+};
 
 export default LigaDesliga;

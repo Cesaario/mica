@@ -17,6 +17,8 @@ import "./CardFuncao.css";
 const useStyles = makeStyles({
   paper: {
     padding: 1,
+    cursor: "pointer",
+    height: 90,
   },
 });
 
