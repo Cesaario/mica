@@ -9,34 +9,38 @@ import {
   TextField,
   Grid,
   MenuItem,
+  useTheme
 } from "@material-ui/core";
 import { entradas, saidas } from "../../shared/util/util";
 
-const useStyles = makeStyles({
-  botaoConfig: {
-    backgroundColor: "#3949ab",
-    color: "#fff",
-    width: 150,
-    margin: 20,
-  },
-  paper: {
-    height: 90,
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  input: {
-    width: "100%",
-  },
-  dialogo: {
-    width: 300,
-    margin: 10,
-  },
+const useStyles = makeStyles(({ palette }) => {
+  return {
+    botaoConfig: {
+      backgroundColor: palette.primary.main,
+      color: palette.grey[50],
+      width: 150,
+      margin: 20,
+    },
+    paper: {
+      height: 90,
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    input: {
+      width: "100%",
+    },
+    dialogo: {
+      width: 300,
+      margin: 10,
+    },
+  };
 });
 
 const ConfiguracaoSimulador = () => {
-  const classes = useStyles();
+  const theme = useTheme();
+  const classes = useStyles(theme);
 
   const [statusModal, setStatusModal] = useState(false);
 
