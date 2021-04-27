@@ -29,7 +29,7 @@ const CardFuncao = () => {
 
   const [funcao, setFuncao] = useState(defaultTf);
   const [inputFuncao, setInputFuncao] = useState(defaultTf);
-  const [statusModalEdicao, setStatusModalEdicao] = useState(true);
+  const [statusModalEdicao, setStatusModalEdicao] = useState(false);
 
   const handleSave = () => {
     const valorFuncao = inputFuncao;
