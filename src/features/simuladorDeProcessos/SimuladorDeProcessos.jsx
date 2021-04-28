@@ -21,8 +21,14 @@ const useStyles = makeStyles({
 const SimuladorDeProcessos = () => {
   const classes = useStyles();
 
-  const [connected, emit] = useSocket();
-  const [data] = useSimulador(emit, true);
+  const [connected, socket] = useSocket();
+  const paramI = { num: [1], den: [1, 2] };
+  const paramC = {
+    entrada: 1,
+    tempoAlvo: 10,
+    escala: 1
+  };
+  const [data] = useSimulador(socket, true, 1, paramI, paramC);
 
   return (
     <Grid container direction="column">

@@ -1,7 +1,6 @@
 import { Paper, Button, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles(({ palette }) => {
-  console.log(palette)
   return {
     botaoLiga: {
       backgroundColor: palette.success.main,
