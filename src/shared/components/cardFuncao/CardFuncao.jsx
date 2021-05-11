@@ -25,7 +25,7 @@ const useStyles = makeStyles({
 const CardFuncao = () => {
   const classes = useStyles();
 
-  const defaultTf = { num: [1], den: [1, 2] };
+  const defaultTf = { num: [1], den: [1, 1] };
 
   const [funcao, setFuncao] = useState(defaultTf);
   const [inputFuncao, setInputFuncao] = useState(defaultTf);

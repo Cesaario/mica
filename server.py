@@ -36,8 +36,6 @@ def disconnect(sid):
 @sio.on('valoresIniciais')
 def valoresIniciais(sid, NumString, DenString):
 
-	print("aaa", NumString, DenString)
-
 	Num = np.asarray(json.loads(NumString)).astype(np.float)
 	Den = np.asarray(json.loads(DenString)).astype(np.float)
 
@@ -71,7 +69,7 @@ def valoresIniciais(sid, NumString, DenString):
 
 	#print('tempoValoresIniciais', start-end)
 
-	sio.emit('respostaValoresIniciais', {'A':json.dumps(A.tolist()),'B':json.dumps(B.tolist()),'C':json.dumps(C.tolist()),'x0':json.dumps(x0.tolist()),'n':n})
+	sio.emit('respostaValoresIniciais', {'A':json.dumps([A.tolist()]),'B':json.dumps(B.tolist()),'C':json.dumps(C.tolist()),'x0':json.dumps(x0.tolist()),'n':n})
 	#sio.emit('respostaValoresIniciais', data=(json.dumps(A.tolist()), json.dumps(B.tolist()), json.dumps(C.tolist()), json.dumps(x0.tolist()), n))
 
 
@@ -84,16 +82,20 @@ def calculoODE(sid, entrada, tempoAtual, escala, A, B, C, x0, t_tend, u_tend, y_
 
 	start = time.time()
 
-	print(escala, t_tend[-1], tempoAtual)
+	tempoAtual = tempoAtual / 1000 #Recebido em ms
+
+	print("-------------")
+	print("x0", x0)
+
 	t = escala * np.linspace(t_tend[-1], tempoAtual, 4)
 
-	x0 = np.squeeze(np.asarray(x0))
-	x = x0
+	print("t", t)
 
-	#Método Runge Kutta para resolver equações diferenciais.
+	x0 = np.squeeze(np.asarray(x0))
+
+	#Método Runge Kutta para resolver equações diferenciais
 	x = odeint(odeAxBu, x0, t, args=(entrada, A, B)) 
-	aux = [0, 1, 2]
-	x0 = np.transpose(np.delete(x,aux,0))
+	x0 = np.transpose([x[-1]])
 
 	#Resultado do passo da simulação
 	y = np.matmul(C,x0)
@@ -108,8 +110,8 @@ def calculoODE(sid, entrada, tempoAtual, escala, A, B, C, x0, t_tend, u_tend, y_
 	concY = y
 	y_tend = np.concatenate((y_tend, concY))
 
-	end = time.time()
-	print('tempoODE', (end-start) * 1000)
+	#end = time.time()
+	#print('tempoODE', (end-start) * 1000)
 
 	sio.emit('respostaODE', {'t':json.dumps(t.tolist()),'t_tend':json.dumps(t_tend.tolist()),'u_tend':json.dumps(u_tend.tolist()),'y_tend':json.dumps(y_tend.tolist()),'x0':json.dumps(x0.tolist())})
 
