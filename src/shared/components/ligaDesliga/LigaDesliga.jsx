@@ -24,15 +24,25 @@ const useStyles = makeStyles(({ palette }) => {
   };
 });
 
-const LigaDesliga = () => {
+const LigaDesliga = (props) => {
   const classes = useStyles();
+
+  const { setLigado } = props;
 
   return (
     <Paper className={classes.paper}>
-      <Button variant="contained" className={classes.botaoLiga}>
+      <Button
+        variant="contained"
+        className={classes.botaoLiga}
+        onClick={() => setLigado(true)}
+      >
         Ligar
       </Button>
-      <Button variant="contained" className={classes.botaoDesliga}>
+      <Button
+        variant="contained"
+        className={classes.botaoDesliga}
+        onClick={() => setLigado(false)}
+      >
         Desligar
       </Button>
     </Paper>

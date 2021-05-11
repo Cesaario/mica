@@ -22,13 +22,17 @@ const SimuladorDeProcessos = () => {
   const classes = useStyles();
 
   const [connected, socket] = useSocket();
+  const [ligado, setLigado] = useState(false);
+
   const paramI = { num: [1], den: [1, 2] };
   const paramC = {
     entrada: 1,
     tempoAlvo: 10,
-    escala: 1
+    escala: 1,
+    dt: 0.1,
   };
-  const [data] = useSimulador(socket, true, 1, paramI, paramC);
+
+  const [data] = useSimulador(socket, ligado, 1000, paramI, paramC);
 
   return (
     <Grid container direction="column">
@@ -47,7 +51,7 @@ const SimuladorDeProcessos = () => {
           <ConfiguracaoSimulador />
         </Grid>
         <Grid item xs={3}>
-          <LigaDesliga />
+          <LigaDesliga setLigado={setLigado} />
         </Grid>
       </Grid>
       <Grid item className={classes.gridGrafico}>
