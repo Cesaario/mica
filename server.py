@@ -25,14 +25,10 @@ def connect(sid, env):
 def disconnect(sid):
     print('desconectado ', sid)
 
-@sio.on('ClientHandshake')
-def ClientHandshake(sid):
-    sio.emit('ServerHandshake', True)
-
 ####################################################################################
 #                            DEFINIÇÃO SERIAL
 
-ser = serial.Serial("COM1", 115200)
+#ser = serial.Serial("COM6", 115200)
 
 ####################################################################################
 #                            SIMULADOR DE PROCESSOS
@@ -40,12 +36,10 @@ ser = serial.Serial("COM1", 115200)
 @sio.on('valoresIniciais')
 def valoresIniciais(sid, NumString, DenString):
 
-	start = time.time()
+	print("aaa", NumString, DenString)
 
 	Num = np.asarray(json.loads(NumString)).astype(np.float)
 	Den = np.asarray(json.loads(DenString)).astype(np.float)
-
-	print(Num, Den)
 
 	Num = Num/Den[0]
 	Den = Den/Den[0]
@@ -86,11 +80,12 @@ def odeAxBu(x, t, u, A, B):
 	return batata
 
 @sio.on('calculoODE')
-def calculoODE(sid, entrada, tempoAlvo, escala, A, B, C, x0, t_tend, u_tend, y_tend):
+def calculoODE(sid, entrada, tempoAtual, escala, A, B, C, x0, t_tend, u_tend, y_tend):
 
 	start = time.time()
 
-	t = escala * np.linspace(t_tend[-1], tempoAlvo, 4)
+	print(escala, t_tend[-1], tempoAtual)
+	t = escala * np.linspace(t_tend[-1], tempoAtual, 4)
 
 	x0 = np.squeeze(np.asarray(x0))
 	x = x0
@@ -130,17 +125,20 @@ def escreverSaida(sid, saida, valor):
 		"valor" : valor
 	}
 	#Envia via porta serial os valores a serem escritos no DAC.
-	ser.write((json.dumps(data)+"$").encode())
+	#ser.write((json.dumps(data)+"$").encode())
 
 @sio.on('pedirValorEntrada')
 def pedirValorEntrada(sid, entrada):
-	leitura_dados()
+	pass
+	#leitura_dados()
 
 def leitura_dados():
 	if(ser.in_waiting > 0):
+		a = 1
 		#Faz a leitura de uma string JSON da porta serial.
-		leitura = ser.read_until(b'}').decode('ascii')
-		handleData(leitura)
+		#leitura = ser.read_until(b'}').decode('ascii')
+		#handleData(leitura)
+	a = 2
 
 def handleData(leitura):
 	obj = json.loads(leitura)
@@ -154,5 +152,5 @@ def handleData(leitura):
 ####################################################################################
 
 if __name__ == '__main__':
-	print('Iniciando...')
+	print('Inicnando...')
 	eventlet.wsgi.server(eventlet.listen(('', 2003)), app)
