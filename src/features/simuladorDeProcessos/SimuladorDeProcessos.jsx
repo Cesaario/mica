@@ -32,7 +32,7 @@ const SimuladorDeProcessos = () => {
     dt: 100, //ms
   };
 
-  const [data] = useSimulador(socket, ligado, paramI, paramC);
+  const [data] = useSimulador(socket, ligado, paramI, paramC, () => setLigado(false));
 
   return (
     <Grid container direction="column">
