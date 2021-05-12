@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Grid, makeStyles } from "@material-ui/core";
 import CardFuncao from "../../shared/components/cardFuncao/CardFuncao";
 import LigaDesliga from "../../shared/components/ligaDesliga/LigaDesliga";
@@ -6,6 +6,7 @@ import Grafico from "../../shared/components/grafico/Grafico";
 import ConfiguracaoSimulador from "./ConfiguracaoSimulador";
 import useSocket from "../../shared/socket/useSocket";
 import useSimulador from "../../shared/processos/useSimulador";
+import { funcaoPadrao, configPadrao } from "../../shared/util/util";
 
 const useStyles = makeStyles({
   gridSimulador: {
@@ -23,16 +24,25 @@ const SimuladorDeProcessos = () => {
 
   const [connected, socket] = useSocket();
   const [ligado, setLigado] = useState(false);
+  const [funcaoTransferencia, setFuncaoTransferencia] = useState(funcaoPadrao);
+  const [configuracoes, setConfiguracoes] = useState(configPadrao);
 
-  const paramI = { num: [1], den: [1, 1] };
-  const paramC = {
-    entrada: 1,
-    tempoAlvo: 10000, //ms
-    escala: 1,
-    dt: 100, //ms
-  };
+  const { tempoAlvo, escala, dt } = configuracoes;
 
-  const [data] = useSimulador(socket, ligado, paramI, paramC, () => setLigado(false));
+  const entrada = 1;
+
+  const [tendencias] = useSimulador(
+    socket,
+    ligado,
+    funcaoTransferencia,
+    { tempoAlvo: tempoAlvo * 1000, escala, dt: dt * 1000 },
+    entrada,
+    setLigado
+  );
+
+  useEffect(() => {
+    console.log(tendencias);
+  }, [tendencias])
 
   return (
     <Grid container direction="column">
@@ -45,10 +55,10 @@ const SimuladorDeProcessos = () => {
         justify="flex-start"
       >
         <Grid item xs={6}>
-          <CardFuncao />
+          <CardFuncao setFuncaoSimulador={setFuncaoTransferencia} />
         </Grid>
         <Grid item xs={3}>
-          <ConfiguracaoSimulador />
+          <ConfiguracaoSimulador setConfiguracaoSimulador={setConfiguracoes} />
         </Grid>
         <Grid item xs={3}>
           <LigaDesliga setLigado={setLigado} />

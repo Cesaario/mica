@@ -5,3 +5,13 @@ export const entradas = [
 export const saidas = [
   "S0", "S1"
 ]
+
+export const funcaoPadrao = { num: [1], den: [1, 1] };
+
+export const configPadrao = {
+  entrada: "E0",
+  saida: "S0",
+  escala: 1,
+  dt: 0.1,
+  tempoAlvo: 10,
+};

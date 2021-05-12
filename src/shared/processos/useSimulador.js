@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 
-const PERIODO_RELOGIO = 50; //50ms
+//const PERIODO_RELOGIO = 10; //50ms
 
-const useSimulador = (socket, enabled, parametrosIniciais, parametrosCalculo, desligar) => {
+const useSimulador = (socket, enabled, parametrosIniciais, parametrosCalculo, entrada, setEnabled) => {
   const [estadoInicial, setEstadoInicial] = useState(null);
-  const [dados, setDados] = useState({});
+  const [x0, setX0] = useState({});
   const [tendencias, setTendencias] = useState({
     t_tend: [0],
     u_tend: [0],
@@ -18,8 +18,7 @@ const useSimulador = (socket, enabled, parametrosIniciais, parametrosCalculo, de
   const { A, B, C } = estadoInicial || {};
   const { t_tend, u_tend, y_tend } = tendencias || {};
   const { num, den } = parametrosIniciais;
-  const { entrada, tempoAlvo, escala, dt } = parametrosCalculo;
-  const { x0 } = dados;
+  const { tempoAlvo, escala, dt } = parametrosCalculo;
 
   const calculosIniciais = () => {
     socket.emit("valoresIniciais", JSON.stringify(num), JSON.stringify(den));
@@ -29,16 +28,18 @@ const useSimulador = (socket, enabled, parametrosIniciais, parametrosCalculo, de
         B: JSON.parse(resposta.B),
         C: JSON.parse(resposta.C),
       });
-      setDados({
-        x0: JSON.parse(resposta.x0),
-      })
+      setX0(JSON.parse(resposta.x0))
     })
+    setTendencias({
+      t_tend: [0],
+      u_tend: [0],
+      y_tend: [0],
+    });
   }
 
   const calculoODE = () => {
     const { entrada, tempoAtual, escala, A, B, C, x0, t_tend, u_tend, y_tend } = parametrosRef.current;
     socket.emit("calculoODE", entrada, tempoAtual, escala, A, B, C, x0, t_tend, u_tend, y_tend);
-    console.log("calculandoooooooooooo")
   }
 
   const iniciarRelogio = () => {
@@ -48,9 +49,9 @@ const useSimulador = (socket, enabled, parametrosIniciais, parametrosCalculo, de
         calculoODE();
         parametrosRef.current.tempoAtual += dt;
       } else {
-        desligar();
+        setEnabled(false);
       }
-    }, PERIODO_RELOGIO);
+    }, dt);
     intervalo.current = relogio;
   }
 
@@ -60,13 +61,8 @@ const useSimulador = (socket, enabled, parametrosIniciais, parametrosCalculo, de
 
   useEffect(() => {
     if (!enabled) {
-      setTendencias({
-        t_tend: [0],
-        u_tend: [0],
-        y_tend: [0],
-      });
       setEstadoInicial(null);
-      setDados({});
+      setX0(0);
 
       parametrosRef.current = { tempoAtual: 0 };
 
@@ -97,12 +93,11 @@ const useSimulador = (socket, enabled, parametrosIniciais, parametrosCalculo, de
         u_tend: JSON.parse(resposta.u_tend),
         t_tend: JSON.parse(resposta.t_tend),
       });
-      setDados({ x0: JSON.parse(resposta.x0) })
-      console.log("Calculando: ", parametrosRef.current.tempoAtual);
+      setX0(JSON.parse(resposta.x0))
     });
   }, [socket]);
 
-  return [1];
+  return [tendencias];
 };
 
 export default useSimulador;
