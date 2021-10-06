@@ -40,10 +40,6 @@ const SimuladorDeProcessos = () => {
     setLigado
   );
 
-  useEffect(() => {
-    console.log(tendencias);
-  }, [tendencias])
-
   return (
     <Grid container direction="column">
       <Grid
@@ -65,7 +61,7 @@ const SimuladorDeProcessos = () => {
         </Grid>
       </Grid>
       <Grid item className={classes.gridGrafico}>
-        <Grafico />
+        <Grafico tendencias={tendencias} tempoAlvo={tempoAlvo} />
       </Grid>
       <Grid>{connected ? "ONLINE" : "OFFLINE"}</Grid>
     </Grid>
