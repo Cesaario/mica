@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Grid, makeStyles } from "@material-ui/core";
+import React, { useState } from "react";
+import { Grid, makeStyles, Paper } from "@material-ui/core";
 import CardFuncao from "../../shared/components/cardFuncao/CardFuncao";
 import LigaDesliga from "../../shared/components/ligaDesliga/LigaDesliga";
 import Grafico from "../../shared/components/grafico/Grafico";
@@ -7,6 +7,7 @@ import ConfiguracaoSimulador from "./ConfiguracaoSimulador";
 import useSocket from "../../shared/socket/useSocket";
 import useSimulador from "../../shared/processos/useSimulador";
 import { funcaoPadrao, configPadrao } from "../../shared/util/util";
+import Conectado from "../../shared/components/conectado/Conectado";
 
 const useStyles = makeStyles({
   gridSimulador: {
@@ -16,6 +17,7 @@ const useStyles = makeStyles({
   },
   gridGrafico: {
     padding: "5px 10px",
+    height: 450,
   },
 });
 
@@ -53,17 +55,19 @@ const SimuladorDeProcessos = () => {
         <Grid item xs={6}>
           <CardFuncao setFuncaoSimulador={setFuncaoTransferencia} />
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={2}>
           <ConfiguracaoSimulador setConfiguracaoSimulador={setConfiguracoes} />
         </Grid>
         <Grid item xs={3}>
           <LigaDesliga setLigado={setLigado} />
         </Grid>
+        <Grid item xs={1}>
+          <Conectado conectado={connected} />
+        </Grid>
       </Grid>
       <Grid item className={classes.gridGrafico}>
         <Grafico tendencias={tendencias} tempoAlvo={tempoAlvo} />
       </Grid>
-      <Grid>{connected ? "ONLINE" : "OFFLINE"}</Grid>
     </Grid>
   );
 };
