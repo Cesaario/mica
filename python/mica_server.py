@@ -2,6 +2,7 @@
 import eventlet
 import mica_socket
 import mica_simulador
+import mica_serial
 
 ####################################################################################
 #                            DEFINIÇÃO SERIAL
@@ -61,7 +62,7 @@ def calculoODE(sid, entrada, tempoAtual, escala, A, B, C, x0, t_tend, u_tend, y_
 
 @mica_socket.sio.on('escreverSaida')
 def escreverSaidaSerial(sid, saida, tipo, valor):
-	print(saida, tipo, valor)
+	mica_serial.EscreverSaida(saida, tipo, valor)
 
 ###############################################################
 

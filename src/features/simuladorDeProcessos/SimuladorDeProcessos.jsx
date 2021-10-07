@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Grid, makeStyles, Paper } from "@material-ui/core";
 import CardFuncao from "../../shared/components/cardFuncao/CardFuncao";
 import LigaDesliga from "../../shared/components/ligaDesliga/LigaDesliga";
@@ -6,8 +6,14 @@ import Grafico from "../../shared/components/grafico/Grafico";
 import ConfiguracaoSimulador from "./ConfiguracaoSimulador";
 import useSocket from "../../shared/socket/useSocket";
 import useSimulador from "../../shared/processos/useSimulador";
-import { funcaoPadrao, configPadrao } from "../../shared/util/util";
+import {
+  funcaoPadrao,
+  configPadrao,
+  SAIDA_ANALOGICA,
+} from "../../shared/util/util";
 import Conectado from "../../shared/components/conectado/Conectado";
+import { useRecoilState } from "recoil";
+import EntradasSaidasAtom from "../../shared/atoms/EntradasSaidasAtom";
 
 const useStyles = makeStyles({
   gridSimulador: {
@@ -41,6 +47,32 @@ const SimuladorDeProcessos = () => {
     entrada,
     setLigado
   );
+
+  const [entradasSaidas, setEntradasSaidas] =
+    useRecoilState(EntradasSaidasAtom);
+
+  const atualizarValorSaida = (valor, saidaSelecionada) => {
+    setEntradasSaidas({
+      ...entradasSaidas,
+      saidaAnalogica: {
+        ...entradasSaidas.saidaAnalogica,
+        [saidaSelecionada]: valor,
+      },
+    });
+  };
+
+  useEffect(() => {
+    const valorSaida = tendencias.y_tend[tendencias.y_tend.length - 1];
+    const saidaSelecionada = configuracoes.saida.toLowerCase();
+    atualizarValorSaida(valorSaida, saidaSelecionada);
+    if (connected)
+      socket.emit(
+        "escreverSaida",
+        saidaSelecionada,
+        SAIDA_ANALOGICA,
+        valorSaida
+      );
+  }, [tendencias.y_tend]);
 
   return (
     <Grid container direction="column">

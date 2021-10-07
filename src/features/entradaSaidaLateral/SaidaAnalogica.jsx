@@ -1,10 +1,11 @@
 import { makeStyles } from "@material-ui/core";
+import { calcularCorEntradaSaidaExterna } from "../../shared/util/util"
 
 const styles = makeStyles({
   container: {
     position: "absolute",
     top: 275,
-    right: 0
+    right: 0,
   },
   io: {
     height: 48,
@@ -12,18 +13,23 @@ const styles = makeStyles({
     border: "1px solid #dddddd",
     display: "flex",
     justifyContent: "center",
-    alignItems: "center"
-  }
+    alignItems: "center",
+  },
 });
 
-const SaidaAnalogica = () => {
-
+const SaidaAnalogica = ({ s0, s1 }) => {
   const classes = styles();
 
-  return <div className={classes.container}>
-    <div className={classes.io}>S0</div>
-    <div className={classes.io}>S1</div>
-  </div>;
+  return (
+    <div className={classes.container}>
+      <div className={classes.io} style={{ backgroundColor: calcularCorEntradaSaidaExterna(s0) }}>
+        S0
+      </div>
+      <div className={classes.io} style={{ backgroundColor: calcularCorEntradaSaidaExterna(s1) }}>
+        S1
+      </div>
+    </div>
+  );
 };
 
 export default SaidaAnalogica;

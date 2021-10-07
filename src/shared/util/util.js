@@ -1,3 +1,5 @@
+export const SAIDA_ANALOGICA = "SA";
+
 export const entradas = [
   "E0", "E1", "E2", "E3"
 ]
@@ -14,4 +16,8 @@ export const configPadrao = {
   escala: 1,
   dt: 0.1,
   tempoAlvo: 10,
+};
+
+export const calcularCorEntradaSaidaExterna = (valor) => {
+  return "hsl(122," + Math.floor(37 * valor) + "%,49%)";
 };
