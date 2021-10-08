@@ -12,7 +12,6 @@ const Grafico = ({ tendencias, tempoAlvo }) => {
   const classes = useStyles();
 
   const formatarTendencias = () => {
-    console.log(tendencias);
     const tendenciasFormatadas = [];
     tendencias.t_tend.forEach((tend, index) => {
       if (index > 0) {
@@ -28,7 +27,7 @@ const Grafico = ({ tendencias, tempoAlvo }) => {
   };
 
   return (
-    <Paper className={classes.paper}>
+    <Paper className={classes.paper} elevation={5}>
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={formatarTendencias()}>
           <Line type="monotone" dataKey="y" stroke="#f00" />
@@ -41,7 +40,7 @@ const Grafico = ({ tendencias, tempoAlvo }) => {
             interval={tempoAlvo - 1}
           />
           <YAxis
-            domain={[0, 2]}
+            domain={[0, 1.2]}
             type="number"
             tickFormatter={(number) => parseFloat(number).toFixed(2)}
           />

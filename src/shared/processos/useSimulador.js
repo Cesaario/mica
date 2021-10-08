@@ -1,7 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 
-//const PERIODO_RELOGIO = 10; //50ms
-
 const useSimulador = (socket, enabled, parametrosIniciais, parametrosCalculo, entrada, setEnabled) => {
   const [estadoInicial, setEstadoInicial] = useState(null);
   const [x0, setX0] = useState({});
@@ -12,7 +10,6 @@ const useSimulador = (socket, enabled, parametrosIniciais, parametrosCalculo, en
   });
 
   const intervalo = useRef();
-
   const parametrosRef = useRef({ tempoAtual: 0 });
 
   const { A, B, C } = estadoInicial || {};

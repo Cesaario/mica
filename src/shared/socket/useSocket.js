@@ -3,7 +3,6 @@ import io from "socket.io-client";
 
 const endpoint = "http://localhost:2003";
 
-
 const useSocket = () => {
   const socketRef = useRef();
   const [conectado, setConectado] = useState(false);

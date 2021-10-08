@@ -14,6 +14,7 @@ import {
 import Conectado from "../../shared/components/conectado/Conectado";
 import { useRecoilState } from "recoil";
 import EntradasSaidasAtom from "../../shared/atoms/EntradasSaidasAtom";
+import { useRecoilValue } from "recoil";
 
 const useStyles = makeStyles({
   gridSimulador: {
@@ -22,7 +23,7 @@ const useStyles = makeStyles({
     height: "100%",
   },
   gridGrafico: {
-    padding: "5px 10px",
+    padding: "5px 60px",
     height: 450,
   },
 });
@@ -34,10 +35,13 @@ const SimuladorDeProcessos = () => {
   const [ligado, setLigado] = useState(false);
   const [funcaoTransferencia, setFuncaoTransferencia] = useState(funcaoPadrao);
   const [configuracoes, setConfiguracoes] = useState(configPadrao);
-
+  
   const { tempoAlvo, escala, dt } = configuracoes;
 
-  const entrada = 1;
+  const [entradasSaidas, setEntradasSaidas] =
+    useRecoilState(EntradasSaidasAtom);
+
+  const entrada = entradasSaidas.entradaAnalogica[configuracoes.entrada.toLowerCase()];
 
   const [tendencias] = useSimulador(
     socket,
@@ -47,9 +51,6 @@ const SimuladorDeProcessos = () => {
     entrada,
     setLigado
   );
-
-  const [entradasSaidas, setEntradasSaidas] =
-    useRecoilState(EntradasSaidasAtom);
 
   const atualizarValorSaida = (valor, saidaSelecionada) => {
     setEntradasSaidas({
