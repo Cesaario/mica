@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core";
-import { calcularCorEntradaSaidaExterna } from "../../shared/util/util"
+import { calcularLarguraCorEntradaSaidaExterna } from "../../shared/util/util"
 
 const styles = makeStyles({
   container: {
@@ -22,10 +22,10 @@ const SaidaAnalogica = ({ s0, s1 }) => {
 
   return (
     <div className={classes.container}>
-      <div className={classes.io} style={{ backgroundColor: calcularCorEntradaSaidaExterna(s0) }}>
+      <div className={classes.io} style={{ background: calcularLarguraCorEntradaSaidaExterna(s0) }}>
         S0
       </div>
-      <div className={classes.io} style={{ backgroundColor: calcularCorEntradaSaidaExterna(s1) }}>
+      <div className={classes.io} style={{ background: calcularLarguraCorEntradaSaidaExterna(s1) }}>
         S1
       </div>
     </div>

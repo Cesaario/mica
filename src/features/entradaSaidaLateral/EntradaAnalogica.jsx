@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core";
-import { calcularCorEntradaSaidaExterna } from "../../shared/util/util";
+import { calcularLarguraCorEntradaSaidaExterna } from "../../shared/util/util";
 
 const styles = makeStyles({
   container: {
@@ -14,6 +14,7 @@ const styles = makeStyles({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    background: "linear-gradient(90deg, #FFC0CB 50%, #00FFFF 50%)"
   },
 });
 
@@ -24,25 +25,25 @@ const EntradaAnalogica = ({ e0, e1, e2, e3 }) => {
     <div className={classes.container}>
       <div
         className={classes.io}
-        style={{ backgroundColor: calcularCorEntradaSaidaExterna(e0) }}
+        style={{ background: calcularLarguraCorEntradaSaidaExterna(e0) }}
       >
         E0
       </div>
       <div
         className={classes.io}
-        style={{ backgroundColor: calcularCorEntradaSaidaExterna(e1) }}
+        style={{ background: calcularLarguraCorEntradaSaidaExterna(e1) }}
       >
         E1
       </div>
       <div
         className={classes.io}
-        style={{ backgroundColor: calcularCorEntradaSaidaExterna(e2) }}
+        style={{ background: calcularLarguraCorEntradaSaidaExterna(e2) }}
       >
         E2
       </div>
       <div
         className={classes.io}
-        style={{ backgroundColor: calcularCorEntradaSaidaExterna(e3) }}
+        style={{ background: calcularLarguraCorEntradaSaidaExterna(e3) }}
       >
         E3
       </div>

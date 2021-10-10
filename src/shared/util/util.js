@@ -21,3 +21,7 @@ export const configPadrao = {
 export const calcularCorEntradaSaidaExterna = (valor) => {
   return "hsl(122," + Math.floor(37 * valor) + "%,49%)";
 };
+
+export const calcularLarguraCorEntradaSaidaExterna = (valor) => {
+  return `linear-gradient(90deg, #4fab52 ${Math.ceil(valor * 100)}%, #7d7d7d 0)`;
+}

@@ -40,7 +40,7 @@ const GraficoSimuladorProcessos = ({ tendencias, tempoAlvo }) => {
             interval={tempoAlvo - 1}
           />
           <YAxis
-            domain={[0, 1.2]}
+            domain={[0, 1.0]}
             type="number"
             tickFormatter={(number) => parseFloat(number).toFixed(2)}
           />
