@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Grid, makeStyles, Paper } from "@material-ui/core";
 import CardFuncao from "../../shared/components/cardFuncao/CardFuncao";
 import LigaDesliga from "../../shared/components/ligaDesliga/LigaDesliga";
-import Grafico from "../../shared/components/grafico/Grafico";
+import GraficoSimuladorProcessos from "../../shared/components/grafico/GraficoSimuladorProcessos";
 import ConfiguracaoSimulador from "./ConfiguracaoSimulador";
 import useSocket from "../../shared/socket/useSocket";
 import useSimulador from "../../shared/processos/useSimulador";
@@ -14,7 +14,6 @@ import {
 import Conectado from "../../shared/components/conectado/Conectado";
 import { useRecoilState } from "recoil";
 import EntradasSaidasAtom from "../../shared/atoms/EntradasSaidasAtom";
-import { useRecoilValue } from "recoil";
 
 const useStyles = makeStyles({
   gridSimulador: {
@@ -99,7 +98,7 @@ const SimuladorDeProcessos = () => {
         </Grid>
       </Grid>
       <Grid item className={classes.gridGrafico}>
-        <Grafico tendencias={tendencias} tempoAlvo={tempoAlvo} />
+        <GraficoSimuladorProcessos tendencias={tendencias} tempoAlvo={tempoAlvo} />
       </Grid>
     </Grid>
   );

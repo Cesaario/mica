@@ -8,7 +8,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Grafico = ({ tendencias, tempoAlvo }) => {
+const GraficoSimuladorProcessos = ({ tendencias, tempoAlvo }) => {
   const classes = useStyles();
 
   const formatarTendencias = () => {
@@ -50,4 +50,4 @@ const Grafico = ({ tendencias, tempoAlvo }) => {
   );
 };
 
-export default Grafico;
+export default GraficoSimuladorProcessos;
