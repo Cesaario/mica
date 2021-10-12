@@ -13,6 +13,7 @@ import { BlockMath } from "react-katex";
 import { gerarTf } from "./cardFuncaoUtil";
 import "katex/dist/katex.min.css";
 import "./CardFuncao.css";
+import { funcaoPadrao } from "../../util/util";
 
 const useStyles = makeStyles({
   paper: {
@@ -22,32 +23,31 @@ const useStyles = makeStyles({
   },
 });
 
-const CardFuncao = () => {
+const CardFuncao = ({ setFuncaoSimulador }) => {
   const classes = useStyles();
 
-  const defaultTf = { num: [1], den: [1, 2] };
-
-  const [funcao, setFuncao] = useState(defaultTf);
-  const [inputFuncao, setInputFuncao] = useState(defaultTf);
-  const [statusModalEdicao, setStatusModalEdicao] = useState(true);
+  const [funcao, setFuncao] = useState(funcaoPadrao);
+  const [inputFuncao, setInputFuncao] = useState(funcaoPadrao);
+  const [statusModalEdicao, setStatusModalEdicao] = useState(false);
 
   const handleSave = () => {
     const valorFuncao = inputFuncao;
-  
-    const num = valorFuncao.num.map(valor => Number(valor));
-    const den = valorFuncao.den.map(valor => Number(valor));
 
-    setFuncao({num, den});
+    const num = valorFuncao.num.map((valor) => Number(valor));
+    const den = valorFuncao.den.map((valor) => Number(valor));
+
+    setFuncao({ num, den });
+    setFuncaoSimulador({ num, den });
     setStatusModalEdicao(false);
   };
 
   const aoDigitar = (event, tipo) => {
     const { value } = event.target;
     const valorFormatado = value.split(" ");
-    if(tipo === "numerador"){
-      setInputFuncao({...inputFuncao, num: valorFormatado});
-    }else{
-      setInputFuncao({...inputFuncao, den: valorFormatado});
+    if (tipo === "numerador") {
+      setInputFuncao({ ...inputFuncao, num: valorFormatado });
+    } else {
+      setInputFuncao({ ...inputFuncao, den: valorFormatado });
     }
   };
 

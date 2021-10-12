@@ -20,6 +20,7 @@ const AbaRotas = () => {
           textColor="primary"
           onChange={handleChange}
         >
+          <Tab label="Home" to="/" component={Link}/>
           <Tab label="Simulador de Processos" to="/simulador" component={Link}/>
           <Tab label="Osciloscópio" to="/osciloscopio" component={Link} />
           <Tab label="Teste" disabled />

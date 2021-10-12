@@ -9,9 +9,10 @@ import {
   TextField,
   Grid,
   MenuItem,
-  useTheme
+  useTheme,
 } from "@material-ui/core";
 import { entradas, saidas } from "../../shared/util/util";
+import { configPadrao } from "../../shared/util/util";
 
 const useStyles = makeStyles(({ palette }) => {
   return {
@@ -38,11 +39,24 @@ const useStyles = makeStyles(({ palette }) => {
   };
 });
 
-const ConfiguracaoSimulador = () => {
+const ConfiguracaoSimulador = ({ setConfiguracaoSimulador }) => {
   const theme = useTheme();
   const classes = useStyles(theme);
 
   const [statusModal, setStatusModal] = useState(false);
+  const [configuracoes, setConfiguracoes] = useState(configPadrao);
+
+  const handleConfigChange = (tipo, valor) => {
+    let valorTratado = valor;
+    if (["escala", "passo", "tempoAlvo"].includes(tipo)) {
+      valorTratado = Number(valor);
+    }
+    const novaConfiguracao = { ...configuracoes };
+    novaConfiguracao[tipo] = valorTratado;
+
+    setConfiguracaoSimulador(novaConfiguracao);
+    setConfiguracoes(novaConfiguracao);
+  };
 
   return (
     <Paper className={classes.paper}>
@@ -62,7 +76,10 @@ const ConfiguracaoSimulador = () => {
                 select
                 label="Entrada"
                 className={classes.input}
-                defaultValue={entradas[0]}
+                value={configuracoes.entrada}
+                onChange={(event) =>
+                  handleConfigChange("entrada", event.target.value)
+                }
               >
                 {entradas.map((entrada) => {
                   return (
@@ -78,7 +95,10 @@ const ConfiguracaoSimulador = () => {
                 select
                 label="Saida"
                 className={classes.input}
-                defaultValue={saidas[0]}
+                value={configuracoes.saida}
+                onChange={(event) =>
+                  handleConfigChange("saida", event.target.value)
+                }
               >
                 {saidas.map((saida) => {
                   return (
@@ -95,7 +115,10 @@ const ConfiguracaoSimulador = () => {
                 type="number"
                 inputProps={{ step: 0.5, min: 1, max: 5 }}
                 className={classes.input}
-                defaultValue={1}
+                value={configuracoes.escala}
+                onChange={(event) =>
+                  handleConfigChange("escala", event.target.value)
+                }
               />
             </Grid>
             <Grid item>
@@ -104,7 +127,22 @@ const ConfiguracaoSimulador = () => {
                 type="number"
                 inputProps={{ step: 0.1, min: 0.1, max: 1 }}
                 className={classes.input}
-                defaultValue={0.1}
+                value={configuracoes.dt}
+                onChange={(event) =>
+                  handleConfigChange("dt", event.target.value)
+                }
+              />
+            </Grid>
+            <Grid item>
+              <TextField
+                label="Tempo alvo"
+                type="number"
+                inputProps={{ step: 0.1, min: 0.1, max: 1 }}
+                className={classes.input}
+                value={configuracoes.tempoAlvo}
+                onChange={(event) =>
+                  handleConfigChange("tempoAlvo", event.target.value)
+                }
               />
             </Grid>
             <Grid item>
