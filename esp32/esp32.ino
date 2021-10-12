@@ -13,6 +13,8 @@ void checarEscritaAnalogica(){
       int valorMapeado = (int) (valor * 255);
       if(saida == "s0"){
         dac_output_voltage(DAC_CHANNEL_1, valorMapeado);
+      }else if(saida == "s1"){
+        dac_output_voltage(DAC_CHANNEL_2, valorMapeado);
       }
     }
   }

@@ -28,14 +28,12 @@ def RotinaLeituraDados():
       campos = leitura.split(";")
       if campos[0] == "EA":
         entradasAnalogicas = [float(valor)/4095.0 for valor in campos[1:]]
-        print(entradasAnalogicas)
     time.sleep(0.1)
 
 def PedirLeituraDados():
   sio.emit("resultadoLeituraDados", entradasAnalogicas)
 
 def EscreverSaida(saida, tipo, valor):
-  print("enviando", tipo + ";" + saida + ";" + str(valor))
   conexaoSerial.write((tipo + ";" + saida + ";" + str(valor) + "\n").encode())
 
 rotinaConexao = Thread(target=RotinaConexaoSerial)

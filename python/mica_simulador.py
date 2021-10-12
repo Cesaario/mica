@@ -4,8 +4,6 @@ import json
 from scipy.integrate import odeint
 
 def valoresIniciais(sid, NumString, DenString):
-	print("oaisdioasidoa")
-
 	Num = np.asarray(json.loads(NumString)).astype(np.float)
 	Den = np.asarray(json.loads(DenString)).astype(np.float)
 
@@ -37,10 +35,8 @@ def valoresIniciais(sid, NumString, DenString):
 
 	sio.emit('respostaValoresIniciais', {'A':json.dumps(A.tolist()),'B':json.dumps(B.tolist()),'C':json.dumps(C.tolist()),'x0':json.dumps(x0.tolist()),'n':n})
 
-
 def odeAxBu(x, t, u, A, B):
-	batata = np.matmul(A, x) + np.multiply(B,u)
-	return batata
+	return np.matmul(A, x) + np.multiply(B,u)
 
 def calculoODE(sid, entrada, tempoAtual, escala, A, B, C, x0, t_tend, u_tend, y_tend):
 
