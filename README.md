@@ -25,6 +25,15 @@ Os três prograsmas são:
   
   OBS: Siga o tutorial de montagem do circuito descrito logo abaixo.
   
+### Tutorial de montagem no ESP32
+Como o circuito será montado no ESP32 não têm muita importância. É necessário apenas que os componentes corretos estejam ligados aos pinos corretos. A relação entre pinos e componentes é:
+- LED no GPIO 32.
+- LED no GPIO 33.
+- LED no GPIO 34.
+- LED no GPIO 35.
+- Potenciômetro no DAC_CHANNEL_1 (GPIO 25)
+- Potenciômetro no DAC_CHANNEL_2 (GPIO 26) 
+ 
 ### Passo a passo da execução integrada
   - Faça upload do código no ESP32 e espere que ele se inicie.
   - Execute o arquivo ```run.bat``` na pasta ```/esp32``` e aguarda que ele seja iniciado corretamente.
