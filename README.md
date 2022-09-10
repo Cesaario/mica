@@ -43,3 +43,4 @@ Como o circuito será montado no ESP32 não têm muita importância. É necessá
   
 ### Observações
 - O endereço do socket de comunicação entre a interface e a ponte é ```http://localhost:2003```. A porta serial utilizada entre o ESP32 e a ponte é a ```COM7```. Talvez seja necessário alterar essas variáveis no código. 
+- Caso tenha alguma dúvida sinta-se a vontade para entrar em contato comigo.
