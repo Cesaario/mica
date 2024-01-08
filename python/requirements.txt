@@ -1,5 +1,6 @@
 eventlet==0.33.1
-gevent_socketio==0.3.6
+python-socketio==5.11.0
 numpy==1.23.3
 pyserial==3.5
 scipy==1.9.1
+dnspython==2.2.1
