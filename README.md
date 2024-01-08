@@ -16,8 +16,8 @@ Os três prograsmas são:
 ### Passo a passo da ponte de comunicação
   - Instale o Python em seu computador. https://www.python.org/
   - Acesse a pasta ```/python``` do repositório.
-  - Abre um novo terminal nessa pasta e execute o comando ```pip install -r requirements.txt```.
-  - Execute o arquivo ```run.bat``` para iniciar o programa.
+  - Abre um novo terminal nessa pasta e execute o comando ```pip3 install -r requirements.txt```.
+  - Execute o comando ```python mica_server.py``` para iniciar o programa.
   
 ### Passo a passo do software do ESP32
   - Instale o Arduino IDE no seu computador. https://www.arduino.cc/en/software

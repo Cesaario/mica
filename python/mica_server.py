@@ -26,5 +26,5 @@ def escreverSaidaSerial(sid):
 ###############################################################
 
 if __name__ == '__main__':
-	print('Inicnando...')
+	print('Iniciando...')
 	eventlet.wsgi.server(eventlet.listen(('', 2003)), mica_socket.app)
