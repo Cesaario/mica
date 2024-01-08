@@ -7,9 +7,10 @@ Os três prograsmas são:
   - Software do ESP32 (C++/Arduino)
   
 ### Passo a passo da interface
-  - Instale o NodeJS no seu computador. https://nodejs.org/en/
+  - Instale o NodeJS no seu computador. (Versão recomendada: v18.16.0) https://nodejs.org/en/
+  - Instale o Yarn em seu computador. https://classic.yarnpkg.com/lang/en/docs/install/#windows-stable
   - Acesse a pasta raiz do repositório.
-  - Abra um novo terminal nessa pasta e execute o comando ```npm install``` e em seguida execute ```npm run start```.
+  - Abra um novo terminal nessa pasta e execute o comando ```yarn``` e em seguida execute ```yarn start```.
   - Aguarde a tela do navegador ser exibida.
 
 ### Passo a passo da ponte de comunicação
